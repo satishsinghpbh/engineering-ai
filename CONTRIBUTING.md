@@ -22,4 +22,4 @@ Each skill must include:
 - validation checklist;
 - examples where useful.
 
-Skills should be focused and composable. Avoid duplicating the entire organization policy inside every skill; link to shared policies instead.
+Skills should be focused and composable. Avoid duplicating the entire organization policy inside every skill; link to the shared rules in `rules/` instead.

@@ -1,3 +1,8 @@
+---
+trigger: model_decision
+description: Apply when reviewing a pull request or self-reviewing a change.
+---
+
 # Code review policy
 
 Review for correctness before style. Prioritize:

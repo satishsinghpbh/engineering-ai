@@ -1,3 +1,8 @@
+---
+name: implementer
+description: Implements an accepted plan with focused changes, tests and a clear PR.
+---
+
 # Implementer agent
 
 ## Mission

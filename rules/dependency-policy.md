@@ -1,3 +1,8 @@
+---
+trigger: model_decision
+description: Apply when adding, upgrading or removing a dependency.
+---
+
 # Dependency policy
 
 - Add a dependency only when standard library or existing dependencies are insufficient.

@@ -15,56 +15,40 @@ This is a **safe starter scaffold**, not an autonomous organization-wide install
 
 ## Repository layout
 
+This repository is also a **Devin plugin**: install it once at account (org) scope and every Devin session loads it.
+
 ```text
 engineering-ai/
-├── README.md
-├── ORG_ADOPTION_PLAN.md
-├── SECURITY.md
-├── CONTRIBUTING.md
-├── repo-catalog/
-│   ├── README.md
-│   ├── repositories.yaml
-│   └── repository.schema.json
-├── policies/
-│   ├── engineering-principles.md
+├── .devin-plugin/plugin.json    # Devin plugin manifest
+├── AGENTS.md                    # always-on org rules (keep short; loads in every session)
+├── rules/                       # Devin rules (formerly policies/)
+│   ├── engineering-principles.md   # always_on
+│   ├── review-baseline.md          # OWASP ASVS 5.0 / NIST SSDF mapped review checklist
+│   ├── code-review-policy.md       # model_decision (loaded when relevant)
 │   ├── pull-request-policy.md
-│   ├── code-review-policy.md
 │   ├── security-policy.md
 │   ├── testing-policy.md
 │   ├── dependency-policy.md
 │   └── documentation-policy.md
-├── agents/
-│   ├── README.md
-│   ├── architect.md
-│   ├── implementer.md
-│   ├── reviewer.md
-│   ├── qa.md
-│   ├── security.md
-│   └── release-manager.md
-├── skills/
-│   ├── README.md
-│   ├── code-review/SKILL.md
-│   ├── debugging/SKILL.md
-│   ├── test-strategy/SKILL.md
-│   ├── secure-change-review/SKILL.md
-│   ├── api-change/SKILL.md
-│   ├── database-migration/SKILL.md
-│   ├── dependency-upgrade/SKILL.md
-│   └── documentation/SKILL.md
-├── templates/
-│   ├── pull-request-template.md
-│   ├── issue-bug.md
-│   └── change-plan.md
-├── scripts/
-│   ├── inventory-repos.sh
-│   ├── classify-repos.py
-│   └── validate-catalog.py
-├── .github/
-│   ├── CODEOWNERS
-│   └── workflows/validate-catalog.yml
-└── config/
-    ├── organization.example.yaml
-    └── rollout-matrix.yaml
+├── skills/<name>/SKILL.md       # /engineering-ai:<name> (code-review, fix-cve, onboard-repo, ...)
+├── agents/<name>.md             # subagent role cards (Devin CLI/Desktop)
+├── templates/                   # PR/issue templates + repo-* files used by onboard-repo
+├── repo-catalog/                # repository inventory and schema
+├── scripts/                     # read-only inventory tooling
+├── config/                      # org config and rollout matrix
+├── .github/CODEOWNERS
+├── ORG_ADOPTION_PLAN.md, CONTRIBUTING.md, SECURITY.md, CHANGELOG.md
+```
+
+Standard layout for each application repository (created by the `onboard-repo` skill):
+
+```text
+<repo>/
+├── AGENTS.md                    # repo setup, build/test commands, repo rules (< 16 KiB)
+├── SECURITY.md
+├── .github/REVIEW.md            # Devin Review rules (Devin Review reads the PR's repo, not this plugin)
+├── .github/CODEOWNERS           # human approvers (maker-checker)
+└── .agents/skills/<name>/SKILL.md   # optional repo-only procedures
 ```
 
 ## Quick start
@@ -94,26 +78,25 @@ Review `repo-catalog/repositories.yaml`. Auto-classification is only a first pas
 
 ### 4. Pilot Devin
 
-Start with 3–5 repositories representing different stacks and risk levels. Add only the relevant skill files and a short repository-specific `AGENTS.md` or Devin-supported repository instruction file after checking your current Devin workspace configuration. Do not assume every agent product reads the same instruction filename.
+Start with 3–5 repositories representing different stacks and risk levels. Run `/engineering-ai:onboard-repo` on each pilot repo to add `AGENTS.md`, `.github/REVIEW.md`, `.github/CODEOWNERS` and `SECURITY.md`.
 
 ### 5. Roll out in cohorts
 
 Follow `ORG_ADOPTION_PLAN.md` and `config/rollout-matrix.yaml`. Begin in advisory mode; move to required checks only after teams validate signal quality and false-positive rates.
 
-## Devin Enterprise integration
+## Devin integration
 
-Use Devin Enterprise's organization/workspace controls to configure access, repositories, secrets, and approved integrations. The exact controls and supported instruction/skill discovery paths can vary by Devin product version and deployment. Verify against your current Devin admin documentation before configuring organization-wide behavior.
+1. **Install the plugin:** Customize > Plugins in Devin, install from `https://github.com/satishsinghpbh/engineering-ai` at organization scope. On Devin Enterprise, list it in `requiredPlugins` so no org, repo or user can remove it ([plugin governance](https://docs.devin.ai/product-guides/plugins#governance)).
+2. **Change standards via PR** to this repo (CODEOWNERS review). After merge, confirm the installed plugin is on the new revision.
+3. **Onboard each repo** with `/engineering-ai:onboard-repo`, which adds `AGENTS.md`, `.github/REVIEW.md`, `.github/CODEOWNERS` and `SECURITY.md`.
+4. **Use the skills:** `/engineering-ai:fix-cve` for vulnerabilities (also from Devin Code Scans "Fix with Devin"), `/engineering-ai:code-review`, `/engineering-ai:dependency-upgrade`, and so on.
+5. **Enforce in GitHub:** rulesets on `main` requiring a PR, CODEOWNER approval and passing checks. Devin never merges its own PRs.
 
-Recommended pattern:
-1. Keep this repository as the **source of truth** for shared policies and skill content.
-2. Publish/version skills through the mechanism supported by your Devin Enterprise plan.
-3. Provide repository-specific context in each repo, linking back to the approved shared standard.
-4. Use separate read-only and write-capable identities where possible.
-5. Require human approval for PR merge, production deploy, permission changes, and destructive operations.
+References: [AGENTS.md](https://docs.devin.ai/onboard-devin/agents-md), [Skills](https://docs.devin.ai/product-guides/skills), [Devin Review instruction files](https://docs.devin.ai/work-with-devin/devin-review#agents-md-/-instruction-files), [Plugin layout](https://docs.devin.ai/product-guides/plugin-ecosystem#1-author-your-plugins), [OWASP ASVS](https://asvs.owasp.org/), [NIST SSDF](https://csrc.nist.gov/pubs/sp/800/218/final).
 
 ## Important limitations
 
 - This scaffold does not connect to your GitHub organization or Devin account.
 - It does not automatically install files into 80+ repositories.
 - The catalog classifier is heuristic and must be reviewed.
-- The sample policies are starting defaults. Adapt them to your regulatory, security, architecture, and release requirements.
+- The sample rules are starting defaults. Adapt them to your regulatory, security, architecture, and release requirements.

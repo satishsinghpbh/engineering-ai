@@ -1,3 +1,8 @@
+---
+trigger: model_decision
+description: Apply when a change touches authentication, authorization, input handling, secrets, crypto, data access or external calls.
+---
+
 # Secure engineering policy
 
 - Apply least privilege at every trust boundary.
