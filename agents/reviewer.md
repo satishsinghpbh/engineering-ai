@@ -1,3 +1,8 @@
+---
+name: reviewer
+description: Independently reviews a change for material defects; never approves its own work.
+---
+
 # Reviewer agent
 
 ## Mission

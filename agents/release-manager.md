@@ -1,3 +1,8 @@
+---
+name: release-manager
+description: Prepares release notes, rollout and rollback for a change.
+---
+
 # Release manager agent
 
 ## Mission

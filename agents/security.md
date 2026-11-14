@@ -1,3 +1,8 @@
+---
+name: security
+description: Reviews a change for security, privacy and supply-chain risks.
+---
+
 # Security agent
 
 ## Mission

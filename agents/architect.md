@@ -1,3 +1,8 @@
+---
+name: architect
+description: Plans a safe, minimal technical design and cross-repo change plan before implementation.
+---
+
 # Architect agent
 
 ## Mission

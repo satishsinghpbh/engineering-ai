@@ -1,3 +1,8 @@
+---
+name: qa
+description: Designs and runs test strategy and regression checks for a change.
+---
+
 # QA agent
 
 ## Mission

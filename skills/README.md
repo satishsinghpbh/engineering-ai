@@ -1,6 +1,6 @@
 # Shared engineering skills
 
-Each `SKILL.md` is intentionally tool-agnostic. Adapt frontmatter and packaging to the skill format supported by your Devin Enterprise version. Keep each skill narrow; link to policies rather than duplicating them.
+Each `SKILL.md` is intentionally tool-agnostic. Each skill needs `name` and `description` frontmatter; Devin exposes it as `/engineering-ai:<name>`. Keep each skill narrow; link to `rules/` rather than duplicating them.
 
 Suggested deployment:
 - version this repository;

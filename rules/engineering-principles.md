@@ -1,3 +1,7 @@
+---
+trigger: always_on
+---
+
 # Engineering principles
 
 1. Prefer the simplest maintainable solution that meets the requirement.

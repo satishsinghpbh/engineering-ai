@@ -1,3 +1,8 @@
+---
+trigger: model_decision
+description: Apply when writing, changing or evaluating tests.
+---
+
 # Testing policy
 
 Choose tests proportional to risk:

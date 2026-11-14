@@ -1,3 +1,8 @@
+---
+trigger: model_decision
+description: Apply when opening, updating or describing a pull request.
+---
+
 # Pull request policy
 
 Every PR should:
