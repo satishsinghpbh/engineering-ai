@@ -1,0 +1,17 @@
+# Copy to organization.yaml and customize. Never store credentials here.
+github:
+  organization: YOUR_GITHUB_ORG
+  host: github.com # For GHES, use your enterprise hostname.
+  inventory_visibility: [private, internal, public]
+  exclude_archived_from_rollout: true
+
+governance:
+  default_tier: standard
+  require_human_merge_approval: true
+  agent_self_approval_allowed: false
+  default_agent_access: read-only
+
+deven:
+  primary_agent: Devin
+  enterprise_workspace: YOUR_DEVIN_WORKSPACE
+  shared_skill_distribution: "Confirm the supported mechanism in your Devin Enterprise version."

@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Engineering AI repository catalog",
+  "type": "object",
+  "required": [
+    "organization",
+    "repositories"
+  ],
+  "properties": {
+    "organization": {
+      "type": "string",
+      "minLength": 1
+    },
+    "generated_at": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "repositories": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "full_name",
+          "url",
+          "visibility",
+          "archived",
+          "lifecycle",
+          "owner",
+          "tier",
+          "primary_stack"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "full_name": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "visibility": {
+            "enum": [
+              "public",
+              "private",
+              "internal",
+              "unknown"
+            ]
+          },
+          "archived": {
+            "type": "boolean"
+          },
+          "lifecycle": {
+            "enum": [
+              "active",
+              "maintenance",
+              "archived",
+              "unknown"
+            ]
+          },
+          "owner": {
+            "type": "string"
+          },
+          "tier": {
+            "enum": [
+              "critical",
+              "high",
+              "standard",
+              "sandbox",
+              "unknown"
+            ]
+          },
+          "primary_stack": {
+            "type": "string"
+          },
+          "languages": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "topics": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "has_ci": {
+            "type": [
+              "boolean",
+              "string"
+            ]
+          },
+          "has_codeowners": {
+            "type": [
+              "boolean",
+              "string"
+            ]
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

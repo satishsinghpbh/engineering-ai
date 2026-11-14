@@ -1,0 +1,22 @@
+# Suggested rollout controls. Tune with security and platform owners.
+tiers:
+  critical:
+    review_mode: advisory_then_required
+    human_review_required: true
+    security_review_required: true
+    merge_by_agent: false
+  high:
+    review_mode: advisory_then_required
+    human_review_required: true
+    security_review_required: true
+    merge_by_agent: false
+  standard:
+    review_mode: advisory
+    human_review_required: true
+    security_review_required: pipeline_based
+    merge_by_agent: false
+  sandbox:
+    review_mode: advisory
+    human_review_required: true
+    security_review_required: pipeline_based
+    merge_by_agent: false

@@ -1,0 +1,18 @@
+# Replace this example with the generated and owner-verified catalog.
+organization: YOUR_GITHUB_ORG
+generated_at: null
+repositories:
+  - name: example-service
+    full_name: YOUR_GITHUB_ORG/example-service
+    url: https://github.com/YOUR_GITHUB_ORG/example-service
+    visibility: private
+    archived: false
+    lifecycle: unknown
+    owner: unknown
+    tier: standard
+    primary_stack: unknown
+    languages: []
+    topics: []
+    has_ci: unknown
+    has_codeowners: unknown
+    notes: "Example only; replace with real inventory."
